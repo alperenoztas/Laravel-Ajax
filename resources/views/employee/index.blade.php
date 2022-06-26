@@ -156,7 +156,7 @@
                 url: "/fetch-employees",
                 dataType: "json",
                 success: function (response) {
-                    // console.log(response);
+
                     $('tbody').html("");
                     $.each(response.employees, function (key, item) {
                         $('tbody').append('<tr>\
@@ -199,6 +199,11 @@
                 success: function (response) {
                     // console.log(response);
                     if (response.status == 400) {
+                        Swal.fire(
+                            'Adding Employee',
+                            'Not Added',
+                            'error'
+                        )
                         $('#save_msgList').html("");
                         $('#save_msgList').addClass('alert alert-danger');
                         $.each(response.errors, function (key, err_value) {
@@ -206,6 +211,12 @@
                         });
                         $('.add_employee').text('Save');
                     } else {
+
+                        Swal.fire(
+                            'Adding Employee',
+                            'Added',
+                            'success'
+                        )
                         $('#save_msgList').html("");
                         $('#success_message').addClass('alert alert-success');
                         $('#success_message').text(response.message);
